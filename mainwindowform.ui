@@ -6,23 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>812</width>
-    <height>600</height>
+    <width>1290</width>
+    <height>703</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Qt GUI</string>
+   <string>Dancing Water Fountain</string>
   </property>
-  <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout" stretch=""/>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../../Downloads/image.ico</normaloff>../../../../Downloads/image.ico</iconset>
+  </property>
+  <widget class="OSGWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout"/>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>812</width>
-     <height>26</height>
+     <width>1290</width>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -76,6 +80,14 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>OSGWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">OSGWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -3,10 +3,14 @@
 
 #include <QMainWindow>
 #include <QtCore>
+#include <QPainter>
+#include <QtGUi>
+#include <QApplication>
+#include <QGridLayout>
+#include <QMenuBar>
+#include <QMenu>
 
-namespace Ui {
-class MainWindowForm;
-}
+#include "osgwidget.h"
 
 class MainWindow : public QMainWindow
 {
@@ -16,11 +20,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+protected:
+
 public slots:
     void on_actionExit_triggered();
 
 private:
-    Ui::MainWindowForm *mMainWindowUI;
 };
 
 #endif // MAINWINDOW_H

@@ -1,16 +1,16 @@
 #include "mainwindow.h"
-#include "ui_mainwindowform.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow{parent},
-    mMainWindowUI{new Ui::MainWindowForm}
+    QMainWindow{parent}
+
 {
-    mMainWindowUI->setupUi(this);
+    OSGWidget *osgwidget = new OSGWidget(this);
+    this->setCentralWidget(osgwidget);
 }
 
 MainWindow::~MainWindow()
 {
-    delete mMainWindowUI;
+
 }
 
 void MainWindow::on_actionExit_triggered()
