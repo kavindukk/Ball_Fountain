@@ -17,8 +17,35 @@
    <iconset>
     <normaloff>../../../../Downloads/image.ico</normaloff>../../../../Downloads/image.ico</iconset>
   </property>
-  <widget class="OSGWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout"/>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="OSGWidget" name="widget" native="true"/>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_2">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QPushButton" name="pushButton">
+       <property name="geometry">
+        <rect>
+         <x>400</x>
+         <y>200</y>
+         <width>80</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>PushButton</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -84,7 +111,7 @@
   <customwidget>
    <class>OSGWidget</class>
    <extends>QWidget</extends>
-   <header location="global">OSGWidget.h</header>
+   <header>osgwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

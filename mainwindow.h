@@ -12,6 +12,10 @@
 
 #include "osgwidget.h"
 
+namespace Ui {
+class MainWindowForm;
+}
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -26,6 +30,7 @@ public slots:
     void on_actionExit_triggered();
 
 private:
+    Ui::MainWindowForm * mMainWindowUI;
 };
 
 #endif // MAINWINDOW_H

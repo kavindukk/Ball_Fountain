@@ -1,11 +1,13 @@
 #include "mainwindow.h"
+#include "ui_mainwindowform.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow{parent}
+    QMainWindow{parent},
+    mMainWindowUI{new Ui::MainWindowForm}
 
 {
-    OSGWidget *osgwidget = new OSGWidget(this);
-    this->setCentralWidget(osgwidget);
+    resize(800,600);
+    mMainWindowUI->setupUi(this);
 }
 
 MainWindow::~MainWindow()
