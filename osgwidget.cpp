@@ -36,20 +36,27 @@ public:
         else
             mCount--;
 
-
-        osg::Vec3d scaleFactor(mScaleStep*mCount+1.0, 1.0, 1.0);
+        sp.Update();
+        position = sp.getPosition();
+        osg::Vec3d scaleFactor(position[0], position[0], -position[1]);
+//        osg::Vec3d scaleFactor(mScaleStep*mCount+1.0, 1.0, 1.0);
         osg::PositionAttitudeTransform *pat = dynamic_cast<osg::PositionAttitudeTransform *> (node);
-        pat->setScale(scaleFactor);
+//        pat->setScale(scaleFactor);
+        pat->setPosition(scaleFactor);
 
         traverse(node, nv);
 
-        if(mCount==30 || mCount==0)
+        if(mCount==30 || mCount==-30)
             mUp=!mUp;
+
     }
 protected:
     bool mUp{true};
-    unsigned int mCount{0};
+//    unsigned int mCount{0};
+    int mCount{0};
     double mScaleStep{1.0/30.0};
+    SpherePhysics sp;
+    std::array<double,2> position;
 };
 
 
@@ -72,7 +79,7 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     osg::Camera* camera = new osg::Camera;
     camera->setViewport( 0, 0, this->width() * pixelRatio, this->height() * pixelRatio );
 
-    camera->setClearColor( osg::Vec4( 0.f, 0.f, .5, 1.f ) );
+    camera->setClearColor( osg::Vec4( 0.f, 0.f, 0.5, 1.f ) );
     camera->setProjectionMatrixAsPerspective( 45.f, aspectRatio, 1.f, 1000.f );
     camera->setGraphicsContext( mGraphicsWindow );
     mView->setCamera( camera );
@@ -112,8 +119,6 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     transform->setPosition(osg::Vec3( 0.f, 0.f, 0.f ));
     transform->setUpdateCallback(new SphereUpdateCallback());
     transform->addChild(geode);
-
-
 
     mRoot->addChild(transform);
 

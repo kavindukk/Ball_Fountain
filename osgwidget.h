@@ -9,6 +9,8 @@
 #include <osgGA/TrackballManipulator>
 #include <osgText/Text>
 
+#include "spherephysics.h"
+
 class OSGWidget : public QOpenGLWidget
 {
   Q_OBJECT
@@ -23,7 +25,7 @@ protected:
   virtual void paintGL();
   virtual void resizeGL( int width, int height );
 
-  void timerEvent(QTimerEvent *);
+  void timerEvent(QTimerEvent *); 
 
 private:
   virtual void on_resize( int width, int height );

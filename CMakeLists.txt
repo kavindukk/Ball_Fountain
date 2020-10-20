@@ -14,6 +14,11 @@ SET(CMAKE_AUTOMOC ON)
 SET(CMAKE_AUTOUIC ON)
 SET(CMAKE_AUTORCC ON)
 
+add_library( physics STATIC
+    spherephysics.h
+    spherephysics.cpp
+)
+
 add_executable(${PROJECT_NAME}
     main.cpp
     mainwindow.cpp
@@ -27,4 +32,5 @@ target_link_libraries(${PROJECT_NAME}
     ${OPENSCENEGRAPH_LIBRARIES}
     Qt5::Widgets
     Qt5::Gui
+    physics
 )
