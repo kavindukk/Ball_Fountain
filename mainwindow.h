@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QtCore>
 #include <QPainter>
-#include <QtGUi>
+//#include <QtGUi>
 #include <QApplication>
 #include <QGridLayout>
 #include <QMenuBar>

@@ -1,5 +1,5 @@
-#ifndef MEEN_570_OSGWIDGET
-#define MEEN_570_OSGWIDGET
+#ifndef OSGWIDGET_H
+#define OSGWIDGET_H
 
 #include <QOpenGLWidget>
 
@@ -10,6 +10,7 @@
 #include <osgText/Text>
 
 #include "spherephysics.h"
+#include<spherecallback.h>
 
 class OSGWidget : public QOpenGLWidget
 {

@@ -26,6 +26,8 @@ add_executable(${PROJECT_NAME}
     mainwindowform.ui
     osgwidget.cpp
     osgwidget.h
+    spherecallback.cpp 
+    spherecallback.h 
 )
 
 target_link_libraries(${PROJECT_NAME}
