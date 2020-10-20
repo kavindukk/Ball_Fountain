@@ -10,8 +10,8 @@ SpherePhysics::SpherePhysics(std::array<double,2> position,
 
 void SpherePhysics::UpdatePosition()
 {
-this->position = {  velocity[0]*dt,
-                    velocity[1]*dt + 0.5*gravity*dt*dt,                                      
+this->position = {  position[0] + velocity[0]*dt,
+                    position[1] + velocity[1]*dt + 0.5*gravity*dt*dt,                                      
                 };
 }
 

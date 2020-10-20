@@ -33,12 +33,12 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
   , mViewer{ new osgViewer::CompositeViewer }
 {
     mRoot = new osg::Group;
-
+    //Create View
     mView = new osgViewer::View;
-
+    //Create Camera 
     float aspectRatio = static_cast<float>( this->width() ) / static_cast<float>( this->height() );
     auto pixelRatio   = this->devicePixelRatio();
-
+    
     osg::Camera* camera = new osg::Camera;
     camera->setViewport( 0, 0, this->width() * pixelRatio, this->height() * pixelRatio );
 
@@ -46,15 +46,19 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     camera->setProjectionMatrixAsPerspective( 45.f, aspectRatio, 1.f, 1000.f );
     camera->setGraphicsContext( mGraphicsWindow );
     mView->setCamera( camera );
+    // End of Create Camera
 
 
     mView->setSceneData( mRoot.get() );
     mView->addEventHandler( new osgViewer::StatsHandler );
-
+    
+    //Build Manipulator
     osg::ref_ptr<osgGA::TrackballManipulator> manipulator = new osgGA::TrackballManipulator;
     manipulator->setAllowThrow( false );
     manipulator->setHomePosition(osg::Vec3d(0.0,-20.0,3.0),osg::Vec3d(0,0,0),osg::Vec3d(0,0,1));
     mView->setCameraManipulator( manipulator );
+    //End of Manipulator
+    //Create View
 
 
     mViewer->addView( mView );
@@ -62,11 +66,14 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     mViewer->realize();
     mView->home();
 
+    //Create Sphere
     osg::Sphere* sphere    = new osg::Sphere( osg::Vec3( 0.f, 0.f, 0.f ), 2.0f );
     osg::ShapeDrawable* sd = new osg::ShapeDrawable( sphere );
     sd->setColor( osg::Vec4( 1.f, 0.f, 0.f, 1.f ) );
     sd->setName( "Sphere" );
+    //
 
+    //Create Geometry
     osg::Geode* geode = new osg::Geode;
     geode->addDrawable( sd );
 
@@ -77,11 +84,14 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
 
     stateSet->setAttributeAndModes( material, osg::StateAttribute::ON );
     stateSet->setMode( GL_DEPTH_TEST, osg::StateAttribute::ON );
+    //
 
+    //Create Transformation
     osg::PositionAttitudeTransform *transform = new osg::PositionAttitudeTransform;
     transform->setPosition(osg::Vec3( 0.f, 0.f, 0.f ));
     transform->setUpdateCallback(new SphereUpdateCallback());
     transform->addChild(geode);
+    //
 
     mRoot->addChild(transform);
 

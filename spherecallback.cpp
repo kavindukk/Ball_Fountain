@@ -10,7 +10,7 @@ void SphereUpdateCallback::operator()(osg::Node* node, osg::NodeVisitor* nv)
 
         sp.Update();
         position = sp.getPosition();
-        osg::Vec3d scaleFactor(position[0], position[0], -position[1]);
+        osg::Vec3d scaleFactor(position[0], position[0], - position[1]);
 //        osg::Vec3d scaleFactor(mScaleStep*mCount+1.0, 1.0, 1.0);
         osg::PositionAttitudeTransform *pat = dynamic_cast<osg::PositionAttitudeTransform *> (node);
 //        pat->setScale(scaleFactor);
