@@ -35,31 +35,7 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     mRoot = new osg::Group;
     //Create View
     mView = new osgViewer::View;
-    //Create Camera 
-    // float aspectRatio = static_cast<float>( this->width() ) / static_cast<float>( this->height() );
-    // auto pixelRatio   = this->devicePixelRatio();
-    
-    // osg::Camera* camera = new osg::Camera;
-    // camera->setViewport( 0, 0, this->width() * pixelRatio, this->height() * pixelRatio );
-
-    // camera->setClearColor( osg::Vec4( 0.f, 0.f, 0.5, 1.f ) );
-    // camera->setProjectionMatrixAsPerspective( 45.f, aspectRatio, 1.f, 1000.f );
-    // camera->setGraphicsContext( mGraphicsWindow );
-    // mView->setCamera( camera );
-    // End of Create Camera
     createCamera(mView);
-
-    mView->setSceneData( mRoot.get() );
-    mView->addEventHandler( new osgViewer::StatsHandler );
-    
-    //Build Manipulator
-//    osg::ref_ptr<osgGA::TrackballManipulator> manipulator = new osgGA::TrackballManipulator;
-    // manipulator->setAllowThrow( false );
-    // manipulator->setHomePosition(osg::Vec3d(0.0,-20.0,3.0),osg::Vec3d(0,0,0),osg::Vec3d(0,0,1));
-    // mView->setCameraManipulator( manipulator );
-    //End of Manipulator
-    //Create View
-
     createManipulator(mView);
 
 
@@ -170,7 +146,6 @@ osgGA::EventQueue* OSGWidget::getEventQueue() const
 
 void OSGWidget::createCamera(osgViewer::View *mView)
 {
-     //Create Camera 
     float aspectRatio = static_cast<float>( this->width() ) / static_cast<float>( this->height() );
     auto pixelRatio   = this->devicePixelRatio();
     
@@ -181,16 +156,14 @@ void OSGWidget::createCamera(osgViewer::View *mView)
     camera->setProjectionMatrixAsPerspective( 45.f, aspectRatio, 1.f, 1000.f );
     camera->setGraphicsContext( mGraphicsWindow );
     mView->setCamera( camera );
-    // End of Create Camera
-
+    mView->setSceneData( mRoot.get() );
+    mView->addEventHandler( new osgViewer::StatsHandler );
 }
 
 void OSGWidget::createManipulator(osgViewer::View *mView)
-{
-    //Build Manipulator
+{    
     osg::ref_ptr<osgGA::TrackballManipulator> manipulator = new osgGA::TrackballManipulator;
     manipulator->setAllowThrow( false );
     manipulator->setHomePosition(osg::Vec3d(0.0,-20.0,3.0),osg::Vec3d(0,0,0),osg::Vec3d(0,0,1));
     mView->setCameraManipulator( manipulator );
-    //End of Manipulator
 }
