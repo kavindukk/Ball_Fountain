@@ -36,29 +36,31 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     //Create View
     mView = new osgViewer::View;
     //Create Camera 
-    float aspectRatio = static_cast<float>( this->width() ) / static_cast<float>( this->height() );
-    auto pixelRatio   = this->devicePixelRatio();
+    // float aspectRatio = static_cast<float>( this->width() ) / static_cast<float>( this->height() );
+    // auto pixelRatio   = this->devicePixelRatio();
     
-    osg::Camera* camera = new osg::Camera;
-    camera->setViewport( 0, 0, this->width() * pixelRatio, this->height() * pixelRatio );
+    // osg::Camera* camera = new osg::Camera;
+    // camera->setViewport( 0, 0, this->width() * pixelRatio, this->height() * pixelRatio );
 
-    camera->setClearColor( osg::Vec4( 0.f, 0.f, 0.5, 1.f ) );
-    camera->setProjectionMatrixAsPerspective( 45.f, aspectRatio, 1.f, 1000.f );
-    camera->setGraphicsContext( mGraphicsWindow );
-    mView->setCamera( camera );
+    // camera->setClearColor( osg::Vec4( 0.f, 0.f, 0.5, 1.f ) );
+    // camera->setProjectionMatrixAsPerspective( 45.f, aspectRatio, 1.f, 1000.f );
+    // camera->setGraphicsContext( mGraphicsWindow );
+    // mView->setCamera( camera );
     // End of Create Camera
-
+    createCamera(mView);
 
     mView->setSceneData( mRoot.get() );
     mView->addEventHandler( new osgViewer::StatsHandler );
     
     //Build Manipulator
-    osg::ref_ptr<osgGA::TrackballManipulator> manipulator = new osgGA::TrackballManipulator;
-    manipulator->setAllowThrow( false );
-    manipulator->setHomePosition(osg::Vec3d(0.0,-20.0,3.0),osg::Vec3d(0,0,0),osg::Vec3d(0,0,1));
-    mView->setCameraManipulator( manipulator );
+//    osg::ref_ptr<osgGA::TrackballManipulator> manipulator = new osgGA::TrackballManipulator;
+    // manipulator->setAllowThrow( false );
+    // manipulator->setHomePosition(osg::Vec3d(0.0,-20.0,3.0),osg::Vec3d(0,0,0),osg::Vec3d(0,0,1));
+    // mView->setCameraManipulator( manipulator );
     //End of Manipulator
     //Create View
+
+    createManipulator(mView);
 
 
     mViewer->addView( mView );
@@ -67,7 +69,7 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     mView->home();
 
     //Create Sphere
-    osg::Sphere* sphere    = new osg::Sphere( osg::Vec3( 0.f, 0.f, 0.f ), 2.0f );
+    osg::Sphere* sphere    = new osg::Sphere( osg::Vec3( 0.f, 0.f, 0.f ), 0.2f );
     osg::ShapeDrawable* sd = new osg::ShapeDrawable( sphere );
     sd->setColor( osg::Vec4( 1.f, 0.f, 0.f, 1.f ) );
     sd->setName( "Sphere" );
@@ -166,3 +168,29 @@ osgGA::EventQueue* OSGWidget::getEventQueue() const
         throw std::runtime_error( "Unable to obtain valid event queue");
 }
 
+void OSGWidget::createCamera(osgViewer::View *mView)
+{
+     //Create Camera 
+    float aspectRatio = static_cast<float>( this->width() ) / static_cast<float>( this->height() );
+    auto pixelRatio   = this->devicePixelRatio();
+    
+    osg::Camera* camera = new osg::Camera;
+    camera->setViewport( 0, 0, this->width() * pixelRatio, this->height() * pixelRatio );
+
+    camera->setClearColor( osg::Vec4( 0.f, 0.f, 0.5, 1.f ) );
+    camera->setProjectionMatrixAsPerspective( 45.f, aspectRatio, 1.f, 1000.f );
+    camera->setGraphicsContext( mGraphicsWindow );
+    mView->setCamera( camera );
+    // End of Create Camera
+
+}
+
+void OSGWidget::createManipulator(osgViewer::View *mView)
+{
+    //Build Manipulator
+    osg::ref_ptr<osgGA::TrackballManipulator> manipulator = new osgGA::TrackballManipulator;
+    manipulator->setAllowThrow( false );
+    manipulator->setHomePosition(osg::Vec3d(0.0,-20.0,3.0),osg::Vec3d(0,0,0),osg::Vec3d(0,0,1));
+    mView->setCameraManipulator( manipulator );
+    //End of Manipulator
+}

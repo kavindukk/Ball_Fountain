@@ -28,6 +28,9 @@ protected:
 
   void timerEvent(QTimerEvent *); 
 
+  void createCamera(osgViewer::View *mView);
+  void createManipulator(osgViewer::View *mView);
+
 private:
   virtual void on_resize( int width, int height );
   osgGA::EventQueue* getEventQueue() const;
@@ -40,3 +43,4 @@ private:
 };
 
 #endif
+
