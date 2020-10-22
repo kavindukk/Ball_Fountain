@@ -29,7 +29,10 @@ protected:
   void timerEvent(QTimerEvent *); 
 
   void createCamera(osgViewer::View *mView);
-  void createManipulator(osgViewer::View *mView);
+  void createManipulator(osgViewer::View *mView);  
+  void createViewer(osgViewer::CompositeViewer *mViewer, osgViewer::View *mView);  
+  osg::Geode* createSpheregeode();
+  osg::PositionAttitudeTransform* createTransformation(osg::Geode* geode);
 
 private:
   virtual void on_resize( int width, int height );

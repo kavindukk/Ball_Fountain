@@ -33,44 +33,10 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
   , mViewer{ new osgViewer::CompositeViewer }
 {
     mRoot = new osg::Group;
-    //Create View
     mView = new osgViewer::View;
-    createCamera(mView);
-    createManipulator(mView);
-
-
-    mViewer->addView( mView );
-    mViewer->setThreadingModel( osgViewer::CompositeViewer::SingleThreaded );
-    mViewer->realize();
-    mView->home();
-
-    //Create Sphere
-    osg::Sphere* sphere    = new osg::Sphere( osg::Vec3( 0.f, 0.f, 0.f ), 0.2f );
-    osg::ShapeDrawable* sd = new osg::ShapeDrawable( sphere );
-    sd->setColor( osg::Vec4( 1.f, 0.f, 0.f, 1.f ) );
-    sd->setName( "Sphere" );
-    //
-
-    //Create Geometry
-    osg::Geode* geode = new osg::Geode;
-    geode->addDrawable( sd );
-
-    osg::StateSet* stateSet = geode->getOrCreateStateSet();
-    osg::Material* material = new osg::Material;
-
-    material->setColorMode( osg::Material::AMBIENT_AND_DIFFUSE );
-
-    stateSet->setAttributeAndModes( material, osg::StateAttribute::ON );
-    stateSet->setMode( GL_DEPTH_TEST, osg::StateAttribute::ON );
-    //
-
-    //Create Transformation
-    osg::PositionAttitudeTransform *transform = new osg::PositionAttitudeTransform;
-    transform->setPosition(osg::Vec3( 0.f, 0.f, 0.f ));
-    transform->setUpdateCallback(new SphereUpdateCallback());
-    transform->addChild(geode);
-    //
-
+    createViewer(mViewer, mView);
+    osg::Geode* geode = createSpheregeode();
+    osg::PositionAttitudeTransform *transform = createTransformation(geode);
     mRoot->addChild(transform);
 
     this->setFocusPolicy( Qt::StrongFocus );
@@ -166,4 +132,48 @@ void OSGWidget::createManipulator(osgViewer::View *mView)
     manipulator->setAllowThrow( false );
     manipulator->setHomePosition(osg::Vec3d(0.0,-20.0,3.0),osg::Vec3d(0,0,0),osg::Vec3d(0,0,1));
     mView->setCameraManipulator( manipulator );
+}
+
+osg::Geode* OSGWidget::createSpheregeode()
+{
+    //Create Sphere
+    osg::Sphere* sphere    = new osg::Sphere( osg::Vec3( 0.f, 0.f, 0.f ), 0.5f );
+    osg::ShapeDrawable* sd = new osg::ShapeDrawable( sphere );
+    sd->setColor( osg::Vec4( 1.f, 0.f, 0.f, 1.f ) );
+    sd->setName( "Sphere" );
+    //
+
+    //Create Geometry
+    osg::Geode* geode = new osg::Geode;
+    geode->addDrawable( sd );
+
+    osg::StateSet* stateSet = geode->getOrCreateStateSet();
+    osg::Material* material = new osg::Material;
+
+    material->setColorMode( osg::Material::AMBIENT_AND_DIFFUSE );
+
+    stateSet->setAttributeAndModes( material, osg::StateAttribute::ON );
+    stateSet->setMode( GL_DEPTH_TEST, osg::StateAttribute::ON );
+    //
+    return geode;
+}
+
+ osg::PositionAttitudeTransform* OSGWidget::createTransformation(osg::Geode* geode)
+ {
+    osg::PositionAttitudeTransform *transform = new osg::PositionAttitudeTransform;
+    transform->setPosition(osg::Vec3( 0.f, 0.f, 0.f ));
+    transform->setUpdateCallback(new SphereUpdateCallback());
+    transform->addChild(geode);
+    return transform;
+ }
+
+void OSGWidget::createViewer(osgViewer::CompositeViewer *mViewer, osgViewer::View *mView)
+{
+    mView = new osgViewer::View;
+    this->createCamera(mView);
+    this->createManipulator(mView);
+    mViewer->addView( mView );
+    mViewer->setThreadingModel( osgViewer::CompositeViewer::SingleThreaded );
+    mViewer->realize();
+    mView->home();
 }
