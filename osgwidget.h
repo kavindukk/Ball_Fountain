@@ -33,6 +33,8 @@ protected:
   void createViewer(osgViewer::CompositeViewer *mViewer, osgViewer::View *mView);  
   osg::Geode* createSpheregeode();
   osg::PositionAttitudeTransform* createTransformation(osg::Geode* geode);
+  void createContainer(osg::Group * mRoot);
+  osg::PositionAttitudeTransform * create_wireframe_tetrahedron(osg::Vec4 &color, osg::Vec3d &scaleFactor);
 
 private:
   virtual void on_resize( int width, int height );
