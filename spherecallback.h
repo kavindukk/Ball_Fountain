@@ -17,7 +17,7 @@ protected:
     int mCount{0};
     double mScaleStep{1.0/30.0};
     SpherePhysics sp;
-    std::array<double,2> position;
+    std::array<double,3> position;
 
 };
 
