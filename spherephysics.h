@@ -17,6 +17,7 @@ public:
     void UpdateVelocity();
     void Update();
     std::array<double,3> getPosition();
+    std::array<double,3> get_velocity();
 protected:
     std::array<double,3> position;
     std::array<double,3> velocity;

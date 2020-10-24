@@ -26,11 +26,16 @@ void SpherePhysics::UpdateVelocity()
 
 void SpherePhysics::Update()
 {
-    this->UpdateVelocity();
     this->UpdatePosition();
+    this->UpdateVelocity();
 }
 
 std::array<double, 3> SpherePhysics::getPosition()
 {
     return this->position;
+}
+
+std::array<double, 3> SpherePhysics::get_velocity()
+{
+    return this->velocity;
 }
