@@ -23,6 +23,10 @@ protected:
     std::array<double,3> velocity;
     double gravity{-9.81};
     double dt;
+    double verticalCOR{-.7};
+    double horizontalCOR{.8};
+    double radiusOfSphere{0.4};
+    double scaleFactorContainer{8.};
 };
 
 #endif // SPHEREPHYSICS_H

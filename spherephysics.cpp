@@ -10,18 +10,32 @@ SpherePhysics::SpherePhysics(std::array<double,3> position,
 
 void SpherePhysics::UpdatePosition()
 {
-this->position = {  position[0] + velocity[0]*dt,
-                    position[1] + velocity[1]*dt,
-                    position[2] + velocity[2]*dt + 0.5*gravity*dt*dt,                                      
-                };
+    if (position[2] + radiusOfSphere < -scaleFactorContainer)
+    {
+        position[2] = -scaleFactorContainer;
+    }
+    else
+    {
+        this->position = {  position[0] + velocity[0]*dt,
+                            position[1] + velocity[1]*dt,
+                            position[2] + velocity[2]*dt + 0.5*gravity*dt*dt,                                      
+                        };        
+    }
 }
 
 void SpherePhysics::UpdateVelocity()
 {
-    this->velocity = {  velocity[0],
-                        velocity[1],
-                        velocity[2]+ gravity*dt,
-                    };
+    if (position[2] + radiusOfSphere <= -scaleFactorContainer)
+    {
+        velocity[2] = verticalCOR*velocity[2];
+    }
+    else
+    {
+        this->velocity = {  velocity[0],
+                            velocity[1],
+                            velocity[2]+ gravity*dt,
+                        };        
+    }    
 }
 
 void SpherePhysics::Update()
