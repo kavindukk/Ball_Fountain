@@ -14,7 +14,23 @@ void SpherePhysics::UpdatePosition()
     else if (position[2] + radiusOfSphere > scaleFactorContainer/2.)    
     {
         position[2] = scaleFactorContainer/2. - radiusOfSphere;
-    }    
+    } 
+    else if (position[0] - radiusOfSphere < -scaleFactorContainer/2.)
+    {
+        position[0] = -scaleFactorContainer/2. + radiusOfSphere;
+    }
+    else if (position[0] + radiusOfSphere > scaleFactorContainer/2.)
+    {
+        position[0] = scaleFactorContainer/2. - radiusOfSphere;
+    }
+    else if (position[1] - radiusOfSphere < -scaleFactorContainer/2.)
+    {
+        position[1] = -scaleFactorContainer/2. + radiusOfSphere;
+    }
+    else if (position[1] + radiusOfSphere > scaleFactorContainer/2.)
+    {
+        position[1] = scaleFactorContainer/2. - radiusOfSphere;
+    }             
     else
     {
         this->position = {  position[0] + velocity[0]*dt,
@@ -29,7 +45,15 @@ void SpherePhysics::UpdateVelocity()
     if (abs(position[2]) == abs(-scaleFactorContainer/2. + radiusOfSphere) )
     {
         velocity[2] = verticalCOR*velocity[2];
-    }    
+    } 
+    else if (abs(position[0]) == abs(-scaleFactorContainer/2. + radiusOfSphere))
+    {
+        velocity[0] = verticalCOR*velocity[0];
+    }
+    else if (abs(position[1]) == abs(-scaleFactorContainer/2. + radiusOfSphere))
+    {
+        velocity[1] = verticalCOR*velocity[1];
+    }      
     else
     {
         this->velocity = {  velocity[0],
