@@ -10,9 +10,9 @@ SpherePhysics::SpherePhysics(std::array<double,3> position,
 
 void SpherePhysics::UpdatePosition()
 {
-    if (position[2] + radiusOfSphere < -scaleFactorContainer)
+    if (position[2] - radiusOfSphere < -scaleFactorContainer/2.)
     {
-        position[2] = -scaleFactorContainer;
+        position[2] = -scaleFactorContainer/2 + radiusOfSphere;
     }
     else
     {
@@ -25,7 +25,7 @@ void SpherePhysics::UpdatePosition()
 
 void SpherePhysics::UpdateVelocity()
 {
-    if (position[2] + radiusOfSphere <= -scaleFactorContainer)
+    if (position[2]  == -scaleFactorContainer/2. + radiusOfSphere)
     {
         velocity[2] = verticalCOR*velocity[2];
     }
