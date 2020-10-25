@@ -15,6 +15,7 @@ public:
     SpherePhysics(std::array<double,3> position={0.,0.,0.}, std::array<double,3> velocity={15.,8.,20.}, double dt = 1.0/30.0);
     void UpdatePosition();
     void UpdateVelocity();
+    void update_velocity_when_sphere_just_hit_boundry(int axisNo);
     void Update();
     std::array<double,3> getPosition();
     std::array<double,3> get_velocity();
