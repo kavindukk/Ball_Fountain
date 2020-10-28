@@ -32,8 +32,7 @@ protected:
   void createManipulator(osgViewer::View *mView);  
   void createViewer(osgViewer::CompositeViewer *mViewer, osgViewer::View *mView);  
   osg::Geode* createSpheregeode();
-  osg::PositionAttitudeTransform* createTransformation(osg::Geode* geode, SpherePhysics* _sp);
-  void createContainer(osg::Group * mRoot);
+  osg::PositionAttitudeTransform* createTransformation(osg::Geode* geode, SpherePhysics* _sp);  
   osg::PositionAttitudeTransform * create_wireframe_tetrahedron(osg::Vec4 &color, osg::Vec3d &scaleFactor);
 
 private:

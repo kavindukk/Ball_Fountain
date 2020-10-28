@@ -50,9 +50,8 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     SpherePhysics * sp3 = new SpherePhysics(std::array<double,3>{0,0,0},std::array<double,3>{0,0,0},1.0/30.0);
     graphicsRepresentation* gr = new graphicsRepresentation(mRoot, sp3, 0.6f, osg::Vec4(1.0f, 0.f, 0.f, 1.f));
    
-    // osg::PositionAttitudeTransform *transform2 = create_wireframe_tetrahedron(osg::Vec4(0.f,0.f,0.f,1.f), osg::Vec3d(4., 4., 4.));
-    // mRoot->addChild(transform2);
-    createContainer(mRoot);
+    osg::PositionAttitudeTransform *transform3 = create_wireframe_tetrahedron(osg::Vec4(1.f,1.f,1.f,1.f), osg::Vec3d(4., 4., 4.));
+    mRoot->addChild(transform3);   
     
     this->setFocusPolicy( Qt::StrongFocus );
     this->setMinimumSize( 100, 100 );
@@ -145,7 +144,7 @@ void OSGWidget::createManipulator(osgViewer::View *mView)
 {
     osg::ref_ptr<osgGA::TrackballManipulator> manipulator = new osgGA::TrackballManipulator;
     manipulator->setAllowThrow( false );
-    manipulator->setHomePosition(osg::Vec3d(-5.0,-20.0,8.0),osg::Vec3d(0,0,0),osg::Vec3d(0,0,1));
+    manipulator->setHomePosition(osg::Vec3d(10.0,-20.0,3.0),osg::Vec3d(0,0,0),osg::Vec3d(0,0,1));
     mView->setCameraManipulator( manipulator );
 }
 
@@ -197,42 +196,35 @@ void OSGWidget::createViewer(osgViewer::CompositeViewer *mViewer, osgViewer::Vie
     mView->home();
 }
 
- void OSGWidget::createContainer(osg::Group * mRoot)
- {
-    osg::ShapeDrawable * shape1 = new osg::ShapeDrawable( new osg::Box(osg::Vec3(0.0f, 0.0f, 0.0f),  8.0f, 8.0f, 8.0f) );
-    shape1->setColor(osg::Vec4(1.f, 0.f, 0.f, 0.1f));
-    osg::Geode * boxGeode = new osg::Geode;
-    boxGeode->addDrawable( shape1 );
-    osg::StateSet* Bstateset = boxGeode->getOrCreateStateSet();
-    osg::PositionAttitudeTransform *boxTransform = new osg::PositionAttitudeTransform;
-    boxTransform->addChild(boxGeode);
-    mRoot->addChild(boxTransform);
- }
-
 osg::PositionAttitudeTransform * OSGWidget::create_wireframe_tetrahedron(osg::Vec4 &color, osg::Vec3d &scaleFactor)
 {
     osg::Vec3Array* v = new osg::Vec3Array;
     v->resize( 8 );
-    (*v)[0].set( 1.f, 1.f, -.5f );
-    (*v)[1].set(-1.f, 1.f, -.5f );
-    (*v)[2].set(1.f, -1.f, -.5f );
-    (*v)[3].set(-1.f, -1.f, -.5f );
-    (*v)[4].set( 1.f, 1.f, .5f );
-    (*v)[5].set(-1.f, 1.f, .5f );
-    (*v)[6].set(1.f, -1.f, .5f );
-    (*v)[7].set(-1.f, -1.f, .5f );
+    (*v)[0].set( -1.f, 1.f, 1.f);
+    (*v)[1].set(1.f, 1.f, 1.f);
+    (*v)[2].set(1.f, -1.f, 1.f );
+    (*v)[3].set(-1.f, -1.f, 1.f );
+    (*v)[4].set( -1.f, 1.f, -1.f );
+    (*v)[5].set(1.f, 1.f, -1.f );
+    (*v)[6].set(1.f, -1.f, -1.f );
+    (*v)[7].set(-1.f, -1.f, -1.f );
 
     osg::Geometry* geom = new osg::Geometry;
     geom->setUseDisplayList( false );
+    geom->setVertexArray( v );
 
     osg::Vec4Array* c = new osg::Vec4Array;
     c->push_back( color );
     geom->setColorArray( c, osg::Array::BIND_OVERALL );
-    GLushort idxLines[15] = {0, 1, 3,  2, 0, 4, 5, 2, 3, 6, 5, 6, 7, 1, 3};
-    GLushort idxLoops[3] = {0, 1, 2 };
 
-    geom->addPrimitiveSet( new osg::DrawElementsUShort( osg::PrimitiveSet::LINES, 15, idxLines ) );
-    geom->addPrimitiveSet( new osg::DrawElementsUShort( osg::PrimitiveSet::LINE_LOOP, 3, idxLoops ) ); 
+    GLushort idxLines[8] = {0, 3, 1,  2, 5, 6, 4, 7};
+    GLushort idxLoops1[4] = {0, 4, 5, 1 };
+    GLushort idxLoops2[4] = {3, 7, 6, 2 };
+
+    geom->addPrimitiveSet( new osg::DrawElementsUShort( osg::PrimitiveSet::LINES, 8, idxLines ) );
+    geom->addPrimitiveSet( new osg::DrawElementsUShort( osg::PrimitiveSet::LINE_LOOP, 4, idxLoops1 ) );
+    geom->addPrimitiveSet( new osg::DrawElementsUShort( osg::PrimitiveSet::LINE_LOOP, 4, idxLoops2 ) );
+
     osg::Geode* geode = new osg::Geode;
     geode->addDrawable( geom );
 
