@@ -1,5 +1,6 @@
 #include "osgwidget.h"
 #include "spherephysics.h"
+#include "graphicsrepresentation.h"
 
 #include <osg/Camera>
 #include <osg/DisplaySettings>
@@ -44,6 +45,11 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     osg::PositionAttitudeTransform *transform2 = createTransformation(geode, sp2);
     mRoot->addChild(transform1);
     mRoot->addChild(transform2);
+
+
+    SpherePhysics * sp3 = new SpherePhysics(std::array<double,3>{0,0,0},std::array<double,3>{0,0,0},1.0/30.0);
+    graphicsRepresentation* gr = new graphicsRepresentation(mRoot, sp3, 0.6f, osg::Vec4(1.0f, 0.f, 0.f, 1.f));
+   
     // osg::PositionAttitudeTransform *transform2 = create_wireframe_tetrahedron(osg::Vec4(0.f,0.f,0.f,1.f), osg::Vec3d(4., 4., 4.));
     // mRoot->addChild(transform2);
     createContainer(mRoot);

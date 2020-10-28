@@ -1,9 +1,11 @@
 #include "graphicsrepresentation.h"
 
-graphicsRepresentation::graphicsRepresentation(osg::Group* Root, float Radius, osg::Vec4 Color):
-    mRoot(Root), mRadius(Radius), mColor(Color)
+graphicsRepresentation::graphicsRepresentation(osg::Group* Root, SpherePhysics* sp, float Radius, osg::Vec4 Color):
+    mRoot(Root), mRadius(Radius), mColor(Color), mSp(sp)
 {
-
+    create_sphere_geode();
+    create_transform();
+    add_sphere_to_root();
 }
 
 void graphicsRepresentation::create_sphere_geode()
@@ -29,9 +31,14 @@ void graphicsRepresentation::create_sphere_geode()
 
 void graphicsRepresentation::create_transform()
 {
-//    osg::PositionAttitudeTransform *transform = new osg::PositionAttitudeTransform;
-//    transform->setPosition(osg::Vec3( 0.f, 0.f, 0.f ));
-//    transform->setUpdateCallback(new SphereUpdateCallback());
-//    transform->addChild(geode);
-//    return transform;
+    osg::PositionAttitudeTransform *transform = new osg::PositionAttitudeTransform;
+    transform->setPosition(osg::Vec3( 0.f, 0.f, 0.f ));
+    transform->setUpdateCallback(new SphereUpdateCallback(mSp));
+    transform->addChild(mGd);
+    this->mPat = transform;
+}
+
+void graphicsRepresentation::add_sphere_to_root()
+{
+    mRoot->addChild(mPat);
 }
