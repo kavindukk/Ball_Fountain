@@ -50,20 +50,10 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     SpherePhysics * sp3 = new SpherePhysics(std::array<double,3>{0,0,0},std::array<double,3>{0,0,0},1.0/30.0);
     graphicsRepresentation* gr = new graphicsRepresentation(mRoot, sp3, 0.6f, osg::Vec4(1.0f, 0.f, 0.f, 1.f));
    
-    osg::PositionAttitudeTransform *transform3 = create_wireframe_tetrahedron(osg::Vec4(1.f,1.f,1.f,1.f), osg::Vec3d(4., 4., 4.));
-    mRoot->addChild(transform3);   
-    
-    this->setFocusPolicy( Qt::StrongFocus );
-    this->setMinimumSize( 100, 100 );
-    this->setMouseTracking( true );
+    osg::PositionAttitudeTransform *wireFrame = create_wireframe_tetrahedron(osg::Vec4(1.f,1.f,1.f,1.f), osg::Vec3d(4., 4., 4.));
+    mRoot->addChild(wireFrame);
 
-    this->update();
-
-    double framesPerSecond{30};
-    double timeStep{1.0/framesPerSecond};
-    double timerDurationInMilliSeconds{timeStep * 1000};
-    mTimerId=startTimer(timerDurationInMilliSeconds);
-
+    create_timer_event();
 }
 
 OSGWidget::~OSGWidget()
@@ -80,14 +70,10 @@ void OSGWidget::timerEvent(QTimerEvent *)
 void OSGWidget::paintEvent( QPaintEvent* /* paintEvent */ )
 {
     this->makeCurrent();
-
     QPainter painter( this );
     painter.setRenderHint( QPainter::Antialiasing );
-
     this->paintGL();
-
     painter.end();
-
     this->doneCurrent();
 }
 
@@ -150,14 +136,11 @@ void OSGWidget::createManipulator(osgViewer::View *mView)
 
 osg::Geode* OSGWidget::createSpheregeode()
 {
-    //Create Sphere
     osg::Sphere* sphere    = new osg::Sphere( osg::Vec3( 0.f, 0.f, 0.f ), 0.5f );
     osg::ShapeDrawable* sd = new osg::ShapeDrawable( sphere );
     sd->setColor( osg::Vec4( 1.f, 0.f, 1.f, 1.f ) );
     sd->setName( "Sphere" );
-    //
 
-    //Create Geometry
     osg::Geode* geode = new osg::Geode;
     geode->addDrawable( sd );
 
@@ -170,7 +153,6 @@ osg::Geode* OSGWidget::createSpheregeode()
     stateSet->setMode( GL_DEPTH_TEST, osg::StateAttribute::ON );
     stateSet->setMode( GL_BLEND, osg::StateAttribute::ON );
     stateSet->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
-    //
     return geode;
 }
 
@@ -194,6 +176,12 @@ void OSGWidget::createViewer(osgViewer::CompositeViewer *mViewer, osgViewer::Vie
     mViewer->setThreadingModel( osgViewer::CompositeViewer::SingleThreaded );
     mViewer->realize();
     mView->home();
+
+    this->setFocusPolicy( Qt::StrongFocus );
+    this->setMinimumSize( 100, 100 );
+    this->setMouseTracking( true );
+
+    this->update();
 }
 
 osg::PositionAttitudeTransform * OSGWidget::create_wireframe_tetrahedron(osg::Vec4 &color, osg::Vec3d &scaleFactor)
@@ -235,4 +223,12 @@ osg::PositionAttitudeTransform * OSGWidget::create_wireframe_tetrahedron(osg::Ve
 
     transform->addChild(geode);
     return transform;
+}
+
+void OSGWidget::create_timer_event()
+{
+    double framesPerSecond{30};
+    double timeStep{1.0/framesPerSecond};
+    double timerDurationInMilliSeconds{timeStep * 1000};
+    mTimerId=startTimer(timerDurationInMilliSeconds);
 }
