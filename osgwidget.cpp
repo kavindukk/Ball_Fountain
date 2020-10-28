@@ -38,8 +38,12 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     mView = new osgViewer::View;
     createViewer(mViewer, mView);
     osg::Geode* geode = createSpheregeode();
-    osg::PositionAttitudeTransform *transform = createTransformation(geode);
-    mRoot->addChild(transform);
+    SpherePhysics * sp1 = new SpherePhysics(std::array<double,3>{0,0,0},std::array<double,3>{10,0,0},1.0/30.0);
+    SpherePhysics * sp2 = new SpherePhysics(std::array<double,3>{1,1,1},std::array<double,3>{15,8,15},1.0/30.0);
+    osg::PositionAttitudeTransform *transform1 = createTransformation(geode, sp1);
+    osg::PositionAttitudeTransform *transform2 = createTransformation(geode, sp2);
+    mRoot->addChild(transform1);
+    mRoot->addChild(transform2);
     // osg::PositionAttitudeTransform *transform2 = create_wireframe_tetrahedron(osg::Vec4(0.f,0.f,0.f,1.f), osg::Vec3d(4., 4., 4.));
     // mRoot->addChild(transform2);
     createContainer(mRoot);
@@ -165,9 +169,10 @@ osg::Geode* OSGWidget::createSpheregeode()
     return geode;
 }
 
- osg::PositionAttitudeTransform* OSGWidget::createTransformation(osg::Geode* geode)
+ osg::PositionAttitudeTransform* OSGWidget::createTransformation(osg::Geode* geode, SpherePhysics* _sp)
  {
-     SpherePhysics *sp = new SpherePhysics(std::array<double,3>{0,0,0},std::array<double,3>{10,0,0},1.0/30.0);
+    // SpherePhysics *sp = new SpherePhysics(std::array<double,3>{0,0,0},std::array<double,3>{10,0,0},1.0/30.0);
+    SpherePhysics *sp = _sp;
     osg::PositionAttitudeTransform *transform = new osg::PositionAttitudeTransform;
     transform->setPosition(osg::Vec3( 0.f, 0.f, 0.f ));
     transform->setUpdateCallback(new SphereUpdateCallback(sp));

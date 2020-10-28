@@ -9,6 +9,8 @@
 #include <osgGA/TrackballManipulator>
 #include <osgText/Text>
 
+//#include "spherecallback.h"
+
 class SpherePhysics
 {
 public:

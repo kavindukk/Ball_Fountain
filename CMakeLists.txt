@@ -22,6 +22,11 @@ add_library( physics STATIC
     spherephysics.cpp
 )
 
+add_library( graphics STATIC
+    graphicsrepresentation.h
+    graphicsrepresentation.cpp
+)
+
 add_executable(${PROJECT_NAME}
     main.cpp
     mainwindow.cpp
@@ -39,6 +44,7 @@ target_link_libraries(${PROJECT_NAME}
     Qt5::Widgets
     Qt5::Gui
     physics
+    graphics
     ${GTEST_LIBRARIES}
     ${GTEST_MAIN_LIBRARIES}
 )
