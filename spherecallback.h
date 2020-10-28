@@ -9,14 +9,14 @@
 class SphereUpdateCallback: public osg::NodeCallback
 {
 public:
-    SphereUpdateCallback(){}
+    SphereUpdateCallback(SpherePhysics* physics){ sp=physics;}
     virtual void operator()(osg::Node* node, osg::NodeVisitor* nv);
 
 protected:
     double mScaleStep{1.0/30.0};
     std::array<double,3> initPos = {0.,0.,0.};
     std::array<double,3> initVel={0.,0.,5.};
-    SpherePhysics sp;
+    SpherePhysics *sp;
     std::array<double,3> position;
 };
 

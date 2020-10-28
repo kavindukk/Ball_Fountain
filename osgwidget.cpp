@@ -1,4 +1,5 @@
 #include "osgwidget.h"
+#include "spherephysics.h"
 
 #include <osg/Camera>
 #include <osg/DisplaySettings>
@@ -166,9 +167,10 @@ osg::Geode* OSGWidget::createSpheregeode()
 
  osg::PositionAttitudeTransform* OSGWidget::createTransformation(osg::Geode* geode)
  {
+     SpherePhysics *sp = new SpherePhysics(std::array<double,3>{0,0,0},std::array<double,3>{10,0,0},1.0/30.0);
     osg::PositionAttitudeTransform *transform = new osg::PositionAttitudeTransform;
     transform->setPosition(osg::Vec3( 0.f, 0.f, 0.f ));
-    transform->setUpdateCallback(new SphereUpdateCallback());
+    transform->setUpdateCallback(new SphereUpdateCallback(sp));
     transform->addChild(geode);
     return transform;
  }
