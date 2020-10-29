@@ -2,6 +2,7 @@
 #define SPHEREPHYSICS_H
 
 #include <array>
+#include <vector>
 
 #include <osg/ref_ptr>
 #include <osgViewer/GraphicsWindow>
@@ -19,6 +20,10 @@ public:
     void UpdateVelocity();
     void update_velocity_when_sphere_just_hit_boundry(int axisNo);
     void Update();
+    void update_collisions_between_balls(SpherePhysics* ball1, SpherePhysics* ball2);
+    double calculate_dot_product(const std::array<double,3> &v1,const std::array<double,3> &v2);
+    std::array<double,3> substract_2_arrays(const std::array<double,3> &v1,const std::array<double,3> &v2);
+    double calculate_2_norm(const std::array<double,3> &v1);
     std::array<double,3> getPosition();
     std::array<double,3> get_velocity();
 protected:

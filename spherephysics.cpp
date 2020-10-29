@@ -69,6 +69,41 @@ void SpherePhysics::Update()
     this->UpdateVelocity();
 }
 
+void SpherePhysics::update_collisions_between_balls(SpherePhysics *ball1, SpherePhysics *ball2)
+{
+    std::array<double,3> v1 = ball1->velocity;
+    std::array<double,3> v2 = ball2->velocity;
+    std::array<double,3> x1 = ball1->position;
+    std::array<double,3> x2 = ball2->position;
+    double m1 = ball1->radiusOfSphere;
+    double m2 = ball2->radiusOfSphere;
+    double coeffCollision = -ball1->verticalCOR;
+
+//    std::array<double,3> vB1 = v1 - (2*m1/(m1+m2))*(calculate_dot_product(v1-v2, x1-x2))
+
+}
+
+
+double SpherePhysics::calculate_2_norm(const std::array<double, 3> &v)
+{
+    double norm = 0.;
+    for(int i=0; i<3; i++)
+    {
+        norm = norm + v[i]*v[i];
+    }
+    return sqrt(norm);
+}
+
+double SpherePhysics::calculate_dot_product(const std::array<double, 3> &v1, const std::array<double, 3> &v2)
+{
+    double v = 0.;
+    for(int i=0; i<3; i++)
+    {
+        v = v + v1[i]*v2[i];
+    }
+    return v;
+}
+
 void SpherePhysics::update_velocity_when_sphere_just_hit_boundry(int axisNo)
 {
     velocity[axisNo] = verticalCOR*velocity[axisNo];
