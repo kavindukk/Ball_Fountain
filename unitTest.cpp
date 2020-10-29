@@ -46,4 +46,29 @@ TEST(MathsFunctions, Check2NormFunction)
     EXPECT_EQ(sqrt(35), norm );
 }
 
+TEST(MathsFunctions, CheckSubstract2ArraysFunction)
+{
+    SpherePhysics sp;
+    std::array<double,3> v1 = {1.,3.,5.};
+    std::array<double,3> v2 = {2.,-1.,1.};
+    std::array<double,3> v = sp.substract_2_arrays(v1,v2);
+
+    EXPECT_EQ(-1., v[0] );
+    EXPECT_EQ(4., v[1] );
+    EXPECT_EQ(4., v[2] );
+}
+
+TEST(MathsFunctions, CheckArrayScalarMultipicationFunction)
+{
+    SpherePhysics sp;
+    std::array<double,3> v = {1.,3.,5.};
+    sp.list_multiply_by_scalar(v,2.);
+
+    EXPECT_EQ(2., v[0] );
+    EXPECT_EQ(6., v[1] );
+    EXPECT_EQ(10., v[2] );
+}
+
+
+
 

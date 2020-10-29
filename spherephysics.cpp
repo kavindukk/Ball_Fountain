@@ -79,8 +79,42 @@ void SpherePhysics::update_collisions_between_balls(SpherePhysics *ball1, Sphere
     double m2 = ball2->radiusOfSphere;
     double coeffCollision = -ball1->verticalCOR;
 
-//    std::array<double,3> vB1 = v1 - (2*m1/(m1+m2))*(calculate_dot_product(v1-v2, x1-x2))
+    double c1 = 2*m1/(m1+m2);
+    c1 = c1 * calculate_dot_product(substract_2_arrays(v1, v2), substract_2_arrays(x1,x2));
+    c1 = c1/calculate_2_norm(substract_2_arrays(x1,x2));
+    std::array<double,3> x1_x2 = substract_2_arrays(x1,x2);
+    std::array<double,3> vB1 =  substract_2_arrays(v1, list_multiply_by_scalar(x1_x2, c1));
+    vB1 = list_multiply_by_scalar(vB1, coeffCollision); 
 
+    double c2 = 2*m1/(m1+m2);
+    c2 = c2 * calculate_dot_product(substract_2_arrays(v2, v1), substract_2_arrays(x2,x1));
+    c1 = c1/calculate_2_norm(substract_2_arrays(x2,x1));
+    std::array<double,3> x2_x1 = substract_2_arrays(x2,x1);
+    std::array<double,3> vB2 =  substract_2_arrays(v2, list_multiply_by_scalar(x2_x1, c2));
+    vB2 = list_multiply_by_scalar(vB2, coeffCollision); 
+   
+    ball1->velocity = vB1;
+    ball2->velocity = vB2;
+}
+
+std::array<double,3> SpherePhysics::list_multiply_by_scalar(std::array<double, 3> &v, double scalar)
+{
+    for(int i=0; i<3; i++)
+    {
+        v[i] = scalar*v[i];
+    }
+    return v;
+}
+
+
+std::array<double, 3> SpherePhysics::substract_2_arrays(const std::array<double, 3> &v1, const std::array<double, 3> &v2)
+{
+    std::array<double, 3> v = {0,0,0};
+    for (int i=0; i<3; i++)
+    {
+        v[i] = v1[i] - v2[i];
+    }
+    return v;
 }
 
 

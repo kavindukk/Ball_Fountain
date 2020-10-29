@@ -24,6 +24,7 @@ public:
     double calculate_dot_product(const std::array<double,3> &v1,const std::array<double,3> &v2);
     std::array<double,3> substract_2_arrays(const std::array<double,3> &v1,const std::array<double,3> &v2);
     double calculate_2_norm(const std::array<double,3> &v1);
+    std::array<double,3> list_multiply_by_scalar(std::array<double,3> &v1,double scalar);
     std::array<double,3> getPosition();
     std::array<double,3> get_velocity();
 protected:
