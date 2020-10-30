@@ -140,6 +140,26 @@ void update_collisions_between_balls(SpherePhysics *ball1, SpherePhysics *ball2)
     ball2->set_velocity(vB2);
 }
 
+bool check_for_collisions(SpherePhysics* ball1, SpherePhysics* ball2)
+{
+    std::array<double,3> pos1 = ball1->getPosition();
+    std::array<double,3> pos2 = ball2->getPosition();
+    double r1 = ball1->get_radius();
+    double r2 = ball2->get_radius();
+    double distance_between_two_spheres = pow(pos1[0]-pos2[0], 2) + pow(pos1[1]-pos2[1], 2) 
+                                        + pow(pos1[2]-pos2[2], 2);
+    distance_between_two_spheres = sqrt(distance_between_two_spheres);
+
+    if (distance_between_two_spheres <= r1 + r2 + 0.1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 std::array<double,3> list_multiply_by_scalar(std::array<double, 3> &v, double scalar)
 {
     for(int i=0; i<3; i++)

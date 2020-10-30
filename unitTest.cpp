@@ -88,5 +88,14 @@ TEST(Collisions, CheckUpdateCollisionFunctionWhenVelocityIsAllTheDirections)
     
 }
 
+TEST(Collisions, CheckCheckForCollisionFunction)
+{
+    SpherePhysics* sp1 = new SpherePhysics(std::array<double,3> {0.,0.,0.}, std::array<double,3> {5.,0.,0}, 1.0/30.0);
+    SpherePhysics* sp2 = new SpherePhysics(std::array<double,3> {0.9,0.,0.}, std::array<double,3> {-5.,0.,0}, 1.0/30.0);
+
+    EXPECT_EQ(true, check_for_collisions(sp1,sp2) );
+}
+
+
 
 
