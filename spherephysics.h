@@ -14,7 +14,8 @@
 class SpherePhysics
 {
 public:
-    SpherePhysics(std::array<double,3> position={0.,0.,0.}, std::array<double,3> velocity={0.,0.,0}, double dt = 1.0/30.0);
+    SpherePhysics(std::array<double,3> position={0.,0.,0.}, std::array<double,3> velocity={0.,0.,0},
+                double radius = 0.4);
     void UpdatePosition();
     void UpdateVelocity();
     void update_velocity_when_sphere_just_hit_boundry(int axisNo);
@@ -30,10 +31,10 @@ protected:
     std::array<double,3> position;
     std::array<double,3> velocity;
     double gravity{-9.81};
-    double dt;
+    double dt{1./30.};
     double verticalCOR{-.7};
     double horizontalCOR{.8};
-    double radiusOfSphere{0.4};
+    double radiusOfSphere;
     double scaleFactorContainer{8.};
 };
 

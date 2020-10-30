@@ -67,8 +67,8 @@ TEST(MathsFunctions, CheckArrayScalarMultipicationFunction)
 
 TEST(Collisions, CheckUpdateCollisionFunctionWhenVelocityIsHorizontal)
 {
-    SpherePhysics* sp1 = new SpherePhysics(std::array<double,3> {0.,0.,0.}, std::array<double,3> {5.,0.,0}, 1.0/30.0);
-    SpherePhysics* sp2 = new SpherePhysics(std::array<double,3> {1.,0.,0.}, std::array<double,3> {-5.,0.,0}, 1.0/30.0);
+    SpherePhysics* sp1 = new SpherePhysics(std::array<double,3> {0.,0.,0.}, std::array<double,3> {5.,0.,0});
+    SpherePhysics* sp2 = new SpherePhysics(std::array<double,3> {1.,0.,0.}, std::array<double,3> {-5.,0.,0});
     update_collisions_between_balls(sp1,sp2);
     EXPECT_EQ(-3.5, sp1->get_velocity()[0] );
     EXPECT_EQ(3.5, sp2->get_velocity()[0] );
@@ -76,8 +76,8 @@ TEST(Collisions, CheckUpdateCollisionFunctionWhenVelocityIsHorizontal)
 
 TEST(Collisions, CheckUpdateCollisionFunctionWhenVelocityIsAllTheDirections)
 {
-    SpherePhysics* sp1 = new SpherePhysics(std::array<double,3> {1.,2.,1.}, std::array<double,3> {5.,4.,5}, 1.0/30.0);
-    SpherePhysics* sp2 = new SpherePhysics(std::array<double,3> {2.,1.,2.}, std::array<double,3> {3.,2., 1.}, 1.0/30.0);
+    SpherePhysics* sp1 = new SpherePhysics(std::array<double,3> {1.,2.,1.}, std::array<double,3> {5.,4.,5});
+    SpherePhysics* sp2 = new SpherePhysics(std::array<double,3> {2.,1.,2.}, std::array<double,3> {3.,2., 1.});
     update_collisions_between_balls(sp1,sp2);
     EXPECT_NEAR(1.88341, sp1->get_velocity()[0], 0.001 );
     EXPECT_NEAR(4.41658, sp1->get_velocity()[1], 0.001 );
@@ -90,8 +90,8 @@ TEST(Collisions, CheckUpdateCollisionFunctionWhenVelocityIsAllTheDirections)
 
 TEST(Collisions, CheckCheckForCollisionFunction)
 {
-    SpherePhysics* sp1 = new SpherePhysics(std::array<double,3> {0.,0.,0.}, std::array<double,3> {5.,0.,0}, 1.0/30.0);
-    SpherePhysics* sp2 = new SpherePhysics(std::array<double,3> {0.9,0.,0.}, std::array<double,3> {-5.,0.,0}, 1.0/30.0);
+    SpherePhysics* sp1 = new SpherePhysics(std::array<double,3> {0.,0.,0.}, std::array<double,3> {5.,0.,0});
+    SpherePhysics* sp2 = new SpherePhysics(std::array<double,3> {0.9,0.,0.}, std::array<double,3> {-5.,0.,0});
 
     EXPECT_EQ(true, check_for_collisions(sp1,sp2) );
 }

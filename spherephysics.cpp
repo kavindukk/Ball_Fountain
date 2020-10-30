@@ -1,7 +1,7 @@
 #include "spherephysics.h"
 
-SpherePhysics::SpherePhysics(std::array<double,3> position, std::array<double,3> velocity, double dt)
-    :position(position),velocity(velocity),dt(dt)
+SpherePhysics::SpherePhysics(std::array<double,3> position, std::array<double,3> velocity, double radius)
+    :position(position),velocity(velocity), radiusOfSphere(radius)
 {
 }
 
