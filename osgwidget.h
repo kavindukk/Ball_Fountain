@@ -34,7 +34,8 @@ protected:
   void create_timer_event();  
   osg::Geode* createSpheregeode();
   osg::PositionAttitudeTransform* createTransformation(osg::Geode* geode, SpherePhysics* _sp);  
-  osg::PositionAttitudeTransform * create_wireframe_tetrahedron(osg::Vec4 &color, osg::Vec3d &scaleFactor);
+  // osg::PositionAttitudeTransform * create_wireframe_tetrahedron(osg::Vec4 &color, osg::Vec3d &scaleFactor);
+  osg::PositionAttitudeTransform * create_wireframe_tetrahedron();
   
 
 private:

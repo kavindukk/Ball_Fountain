@@ -50,7 +50,8 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     SpherePhysics * sp3 = new SpherePhysics(std::array<double,3>{0,0,0},std::array<double,3>{0,0,0},1.0/30.0);
     graphicsRepresentation* gr = new graphicsRepresentation(mRoot, sp3, 0.6f, osg::Vec4(1.0f, 0.f, 0.f, 1.f));
    
-    osg::PositionAttitudeTransform *wireFrame = create_wireframe_tetrahedron(osg::Vec4(1.f,1.f,1.f,1.f), osg::Vec3d(4., 4., 4.));
+//    osg::PositionAttitudeTransform *wireFrame = create_wireframe_tetrahedron(osg::Vec4(1.f,1.f,1.f,1.f), osg::Vec3d(4., 4., 4.));
+    osg::PositionAttitudeTransform *wireFrame = create_wireframe_tetrahedron();
     mRoot->addChild(wireFrame);
 
     create_timer_event();
@@ -184,7 +185,7 @@ void OSGWidget::createViewer(osgViewer::CompositeViewer *mViewer, osgViewer::Vie
     this->update();
 }
 
-osg::PositionAttitudeTransform * OSGWidget::create_wireframe_tetrahedron(osg::Vec4 &color, osg::Vec3d &scaleFactor)
+osg::PositionAttitudeTransform * OSGWidget::create_wireframe_tetrahedron()
 {
     osg::Vec3Array* v = new osg::Vec3Array;
     v->resize( 8 );
@@ -202,7 +203,8 @@ osg::PositionAttitudeTransform * OSGWidget::create_wireframe_tetrahedron(osg::Ve
     geom->setVertexArray( v );
 
     osg::Vec4Array* c = new osg::Vec4Array;
-    c->push_back( color );
+    // c->push_back( color );
+    c->push_back( osg::Vec4(1.f,1.f,1.f,1.f));
     geom->setColorArray( c, osg::Array::BIND_OVERALL );
 
     GLushort idxLines[8] = {0, 3, 1,  2, 5, 6, 4, 7};
@@ -219,7 +221,8 @@ osg::PositionAttitudeTransform * OSGWidget::create_wireframe_tetrahedron(osg::Ve
     geode->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF | osg::StateAttribute::PROTECTED );
     geode->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::ON );
     osg::PositionAttitudeTransform* transform = new osg::PositionAttitudeTransform;
-    transform->setScale(scaleFactor);
+    // transform->setScale(scaleFactor);
+    transform->setScale(osg::Vec3d(4., 4., 4.) );
 
     transform->addChild(geode);
     return transform;
