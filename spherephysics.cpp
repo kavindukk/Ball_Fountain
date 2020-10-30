@@ -131,7 +131,7 @@ void update_collisions_between_balls(SpherePhysics *ball1, SpherePhysics *ball2)
 
     double c2 = 2*m1/(m1+m2);
     c2 = c2 * calculate_dot_product(substract_2_arrays(v2, v1), substract_2_arrays(x2,x1));
-    c1 = c1/calculate_2_norm(substract_2_arrays(x2,x1));
+    c2 = c2/calculate_2_norm(substract_2_arrays(x2,x1));
     std::array<double,3> x2_x1 = substract_2_arrays(x2,x1);
     std::array<double,3> vB2 =  substract_2_arrays(v2, list_multiply_by_scalar(x2_x1, c2));
     vB2 = list_multiply_by_scalar(vB2, coeffCollision); 
