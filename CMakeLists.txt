@@ -39,6 +39,8 @@ add_executable(${PROJECT_NAME}
     osgwidget.h
     spherecallback.cpp 
     spherecallback.h
+    ball.cpp
+    ball.h
     unitTest.cpp 
 )
 
