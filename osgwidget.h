@@ -2,15 +2,21 @@
 #define OSGWIDGET_H
 
 #include <QOpenGLWidget>
-
 #include <osg/ref_ptr>
 #include <osgViewer/GraphicsWindow>
 #include <osgViewer/CompositeViewer>
 #include <osgGA/TrackballManipulator>
 #include <osgText/Text>
+#include <osgViewer/View>
+#include <osgViewer/ViewerEventHandlers>
+#include <QPainter>
 
 #include "spherephysics.h"
-#include<spherecallback.h>
+#include <spherecallback.h>
+#include "graphicsrepresentation.h"
+#include "ball.h"
+
+#include <vector>
 
 class OSGWidget : public QOpenGLWidget
 {
@@ -36,6 +42,8 @@ protected:
   osg::PositionAttitudeTransform* createTransformation(osg::Geode* geode, SpherePhysics* _sp);  
   // osg::PositionAttitudeTransform * create_wireframe_tetrahedron(osg::Vec4 &color, osg::Vec3d &scaleFactor);
   osg::PositionAttitudeTransform * create_wireframe_tetrahedron();
+  ball* create_sphere(osg::Group* root, std::array<double,3> pos, std::array<double,3> vel,
+                     osg::Vec4 Color, float radius );
   
 
 private:
