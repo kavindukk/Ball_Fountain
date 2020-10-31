@@ -210,17 +210,7 @@ osg::PositionAttitudeTransform * OSGWidget::create_wireframe_tetrahedron()
 
 double OSGWidget::create_random_no_between_a_range(double min, double max)
 {
-    std::default_random_engine generator;
-    std::normal_distribution<double> distribution (min+(max-min)/2.,(max-min)/4);
-    double number =distribution(generator);
-    if(number>max)
-    {
-        number=max;
-    }
-    else if(number<min)
-    {
-        number=min;
-    }
+    double number = (max - min) * ( (double)(rand()%100) / 100. ) + min;
     return number;
 }
 
