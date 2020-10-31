@@ -11,33 +11,15 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     mRoot = new osg::Group;
     mView = new osgViewer::View;
     createViewer(mViewer, mView);
-    // osg::Geode* geode = createSpheregeode();
-    // sp1 = new SpherePhysics(std::array<double,3>{0,0,3},std::array<double,3>{0.05,0,0});
-    // SpherePhysics * sp2 = new SpherePhysics(std::array<double,3>{1,1,1},std::array<double,3>{15,8,15});
-    // osg::PositionAttitudeTransform *transform1 = createTransformation(geode, sp1);
-    // osg::PositionAttitudeTransform *transform2 = createTransformation(geode, sp2);
-    // mRoot->addChild(transform1);
-    // mRoot->addChild(transform2);
-
+    osg::Geode* geode = createSpheregeode();
+    
     for (int i = 0; i < 5; i++)
     {
         ballList.push_back(create_sphere(mRoot, std::array<double,3>{0,0,-3.5}, create_a_random_velocity(), create_a_random_color(),(float)create_random_no_between_a_range(0.3,0.9)));
     }
-    
 
-    // ball* ball1 = create_sphere(mRoot, std::array<double,3>{-3,0,3}, std::array<double,3>{8,10,12}, osg::Vec4(0.0f, 1.f, 0.f, 1.f), 0.8f);
-    // ball* ball1 = create_sphere(mRoot, std::array<double,3>{0,0,-3.5}, create_a_random_velocity(), create_a_random_color(),(float)create_random_no_between_a_range(0.3,0.9));
-    // ballList.push_back(ball1);
-    // ball* ball2 = create_sphere(mRoot, std::array<double,3>{0,0,-3.5}, create_a_random_velocity(), create_a_random_color(), (float)create_random_no_between_a_range(0.3,0.9));
-    // ballList.push_back(ball2);
-
-    sp3 = new SpherePhysics(std::array<double,3>{0,0,-3},std::array<double,3>{0,0,10});
-    graphicsRepresentation* gr = new graphicsRepresentation(mRoot, sp3, 0.6f, osg::Vec4(1.0f, 0.f, 0.f, 1.f));
-
-//    osg::PositionAttitudeTransform *wireFrame = create_wireframe_tetrahedron(osg::Vec4(1.f,1.f,1.f,1.f), osg::Vec3d(4., 4., 4.));
     osg::PositionAttitudeTransform *wireFrame = create_wireframe_tetrahedron();
     mRoot->addChild(wireFrame);
-
     create_timer_event();
 }
 
@@ -64,9 +46,9 @@ void OSGWidget::set_ball_velocity(double val, int index)
 
 void OSGWidget::timerEvent(QTimerEvent *)
 {
-    if(check_for_collisions(sp1,sp3)){
-        update_collisions_between_balls(sp1,sp3);
-    }
+    // if(check_for_collisions(sp1,sp3)){
+    //     update_collisions_between_balls(sp1,sp3);
+    // }
     update();
 }
 
