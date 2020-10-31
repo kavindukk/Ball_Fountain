@@ -44,6 +44,7 @@ protected:
   osg::PositionAttitudeTransform * create_wireframe_tetrahedron();
   ball* create_sphere(osg::Group* root, std::array<double,3> pos, std::array<double,3> vel,
                      osg::Vec4 Color, float radius );
+  double create_random_no_between_a_range(double min, double max);
   
 
 private:
@@ -58,6 +59,7 @@ private:
   SpherePhysics* sp1;
   SpherePhysics* sp2;
   SpherePhysics* sp3;
+  std::vector<ball*> ballList;
 };
 
 #endif

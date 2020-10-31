@@ -20,7 +20,7 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     mRoot->addChild(transform2);
 
     ball* ball1 = create_sphere(mRoot, std::array<double,3>{-3,0,3}, std::array<double,3>{8,10,12}, osg::Vec4(0.0f, 1.f, 0.f, 1.f), 0.8f);
-
+    ballList.push_back(ball1);
 
     sp3 = new SpherePhysics(std::array<double,3>{0,0,-3},std::array<double,3>{0,0,10});
     graphicsRepresentation* gr = new graphicsRepresentation(mRoot, sp3, 0.6f, osg::Vec4(1.0f, 0.f, 0.f, 1.f));
@@ -196,7 +196,8 @@ osg::PositionAttitudeTransform * OSGWidget::create_wireframe_tetrahedron()
     osg::Geode* geode = new osg::Geode;
     geode->addDrawable( geom );
 
-    geode->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF | osg::StateAttribute::PROTECTED );
+    geode->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF
+                                         | osg::StateAttribute::PROTECTED );
     geode->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::ON );
     osg::PositionAttitudeTransform* transform = new osg::PositionAttitudeTransform;
     // transform->setScale(scaleFactor);
@@ -206,7 +207,8 @@ osg::PositionAttitudeTransform * OSGWidget::create_wireframe_tetrahedron()
     return transform;
 }
 
-ball* OSGWidget::create_sphere(osg::Group *root, std::array<double,3> pos, std::array<double,3> vel, osg::Vec4 Color, float radius)
+ball* OSGWidget::create_sphere(osg::Group *root, std::array<double,3> pos, std::array<double,3> vel,
+                                 osg::Vec4 Color, float radius)
 {
      SpherePhysics * sp = new SpherePhysics(pos,vel,radius);
      graphicsRepresentation* gr = new graphicsRepresentation(root, sp, radius, Color);
