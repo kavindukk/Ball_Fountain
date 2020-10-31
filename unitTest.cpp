@@ -117,6 +117,12 @@ TEST(MathsFunctions, CheckCreateRandomNoWithinARangeFunction)
     EXPECT_TRUE((number >= 5) && (number <= 10));
 }
 
+TEST(MathsFunctions, CheckconvertingDoubleToFloat)
+{
+
+    EXPECT_EQ(typeid(float), typeid((float)2.));
+}
+
 
 
 

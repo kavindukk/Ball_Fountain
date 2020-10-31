@@ -19,7 +19,8 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     mRoot->addChild(transform1);
     mRoot->addChild(transform2);
 
-    ball* ball1 = create_sphere(mRoot, std::array<double,3>{-3,0,3}, std::array<double,3>{8,10,12}, osg::Vec4(0.0f, 1.f, 0.f, 1.f), 0.8f);
+    // ball* ball1 = create_sphere(mRoot, std::array<double,3>{-3,0,3}, std::array<double,3>{8,10,12}, osg::Vec4(0.0f, 1.f, 0.f, 1.f), 0.8f);
+    ball* ball1 = create_sphere(mRoot, std::array<double,3>{-3,0,3}, std::array<double,3>{8,10,12}, create_a_random_color(), 0.8f);
     ballList.push_back(ball1);
 
     sp3 = new SpherePhysics(std::array<double,3>{0,0,-3},std::array<double,3>{0,0,10});
@@ -221,6 +222,17 @@ double OSGWidget::create_random_no_between_a_range(double min, double max)
         number=min;
     }
     return number;
+}
+
+osg::Vec4 OSGWidget::create_a_random_color( std::array<double,6> rangesRGB)
+{
+    std::vector<float> values = {
+    (float)create_random_no_between_a_range(rangesRGB[0], rangesRGB[1]),
+    (float)create_random_no_between_a_range(rangesRGB[2], rangesRGB[3]),
+    (float)create_random_no_between_a_range(rangesRGB[4], rangesRGB[5]),
+    };
+    osg::Vec4 color(values[0], values[1], values[2], 1.f);
+    return color;
 }
 
 ball* OSGWidget::create_sphere(osg::Group *root, std::array<double,3> pos, std::array<double,3> vel,
