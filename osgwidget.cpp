@@ -12,7 +12,7 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     mView = new osgViewer::View;
     createViewer(mViewer, mView);
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 6; i++)
     {
         ballList.push_back(create_sphere(mRoot, std::array<double,3>{0,0,-3.5}, create_a_random_velocity(), create_a_random_color(),(float)create_random_no_between_a_range(0.3,0.9)));
     }
@@ -45,10 +45,20 @@ void OSGWidget::set_ball_velocity(double val, int index)
 
 void OSGWidget::timerEvent(QTimerEvent *)
 {
-    // if(check_for_collisions(sp1,sp3)){
-    //     update_collisions_between_balls(sp1,sp3);
-    // }
     update();
+    if(mTimerId>80){
+        for(std::vector<ball*>::iterator iter = ballList.begin(), end = ballList.end() ; iter != end; ++iter)
+        {
+            for(std::vector<ball*>::iterator iter2 = iter+1, end = ballList.end() ; iter2 != end; ++iter2)
+            {
+                if(check_for_collisions((*iter)->mSp, (*iter2)->mSp))
+                {
+                    update_collisions_between_balls((*iter)->mSp,(*iter2)->mSp);
+                }
+            }
+        }
+    }
+
 }
 
 void OSGWidget::paintEvent( QPaintEvent* /* paintEvent */ )
