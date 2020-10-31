@@ -261,9 +261,12 @@
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QSlider" name="horizontalSlider">
+         <widget class="QSlider" name="minRadius">
+          <property name="minimum">
+           <number>300</number>
+          </property>
           <property name="maximum">
-           <number>5</number>
+           <number>500</number>
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -271,7 +274,13 @@
          </widget>
         </item>
         <item>
-         <widget class="QSlider" name="horizontalSlider_2">
+         <widget class="QSlider" name="maxRadius">
+          <property name="minimum">
+           <number>600</number>
+          </property>
+          <property name="maximum">
+           <number>900</number>
+          </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -340,9 +349,12 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_3">
               <item>
-               <widget class="QSlider" name="horizontalSlider_3">
+               <widget class="QSlider" name="Rcolor">
+                <property name="minimum">
+                 <number>200</number>
+                </property>
                 <property name="maximum">
-                 <number>5</number>
+                 <number>800</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
@@ -354,9 +366,12 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
-               <widget class="QSlider" name="horizontalSlider_5">
+               <widget class="QSlider" name="Gcolor">
+                <property name="minimum">
+                 <number>200</number>
+                </property>
                 <property name="maximum">
-                 <number>5</number>
+                 <number>800</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
@@ -368,9 +383,12 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_5">
               <item>
-               <widget class="QSlider" name="horizontalSlider_7">
+               <widget class="QSlider" name="Bcolor">
+                <property name="minimum">
+                 <number>200</number>
+                </property>
                 <property name="maximum">
-                 <number>5</number>
+                 <number>800</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
@@ -543,9 +561,12 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_17">
           <item>
-           <widget class="QSlider" name="horizontalSlider_4">
+           <widget class="QSlider" name="xVelocity">
+            <property name="minimum">
+             <number>500</number>
+            </property>
             <property name="maximum">
-             <number>5</number>
+             <number>1500</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -557,9 +578,12 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_18">
           <item>
-           <widget class="QSlider" name="horizontalSlider_6">
+           <widget class="QSlider" name="yVelocity">
+            <property name="minimum">
+             <number>500</number>
+            </property>
             <property name="maximum">
-             <number>5</number>
+             <number>1500</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -571,9 +595,12 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_19">
           <item>
-           <widget class="QSlider" name="horizontalSlider_8">
+           <widget class="QSlider" name="zVelocity">
+            <property name="minimum">
+             <number>500</number>
+            </property>
             <property name="maximum">
-             <number>5</number>
+             <number>1500</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>

@@ -29,6 +29,23 @@ protected:
 public slots:
     void on_actionExit_triggered();
 
+private slots:
+    void on_minRadius_valueChanged(int value);
+
+    void on_maxRadius_valueChanged(int value);
+
+    void on_Rcolor_valueChanged(int value);
+
+    void on_Gcolor_valueChanged(int value);
+
+    void on_Bcolor_valueChanged(int value);
+
+    void on_xVelocity_valueChanged(int value);
+
+    void on_yVelocity_valueChanged(int value);
+
+    void on_zVelocity_valueChanged(int value);
+
 private:
     Ui::MainWindowForm * mMainWindowUI;
 };

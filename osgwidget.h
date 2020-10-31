@@ -28,6 +28,9 @@ public:
              Qt::WindowFlags f = 0 );
 
   virtual ~OSGWidget();
+  void set_ball_color(double val, int index);
+  void set_ball_radius(double val, int index);
+  void set_ball_velocity(double val, int index);
 protected:
   virtual void paintEvent( QPaintEvent* paintEvent );
   virtual void paintGL();
@@ -63,6 +66,9 @@ private:
   SpherePhysics* sp2;
   SpherePhysics* sp3;
   std::vector<ball*> ballList;
+  std::array<double,3> ballColor;
+  std::array<double,2> ballRadius;
+  std::array<double,3> ballVelocity;
 };
 
 #endif
