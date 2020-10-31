@@ -45,6 +45,7 @@ void OSGWidget::set_ball_velocity(double val, int index)
 
 void OSGWidget::timerEvent(QTimerEvent *)
 {
+    ++count;
     update();
     if(mTimerId>80){
         for(std::vector<ball*>::iterator iter = ballList.begin(), end = ballList.end() ; iter != end; ++iter)
@@ -57,6 +58,11 @@ void OSGWidget::timerEvent(QTimerEvent *)
                 }
             }
         }
+    }
+
+    if(count%30==0)
+    {
+         ballList.push_back(create_sphere(mRoot, std::array<double,3>{0,0,-3.5}, create_a_random_velocity(), create_a_random_color(),(float)create_random_no_between_a_range(0.3,0.9)));
     }
 
 }
@@ -197,10 +203,18 @@ double OSGWidget::create_random_no_between_a_range(double min, double max)
 
 std::array<double,3> OSGWidget::create_a_random_velocity(std::array<double, 3> factor)
 {
-    std::array<double,3> vel = {create_random_no_between_a_range(0.2,2.)*factor[0],
-                                create_random_no_between_a_range(0.2,2.)*factor[1],
+    std::array<double,3> vel = {create_random_no_between_a_range(-2.,2.)*factor[0],
+                                create_random_no_between_a_range(-2.,2.)*factor[1],
                                 create_random_no_between_a_range(0.4,2.)*factor[2]
                                 };
+    if(abs(vel[0])<=0.2)
+    {
+        vel[0] = copysign(0.2,vel[0]);
+    }
+    if(abs(vel[1])<=0.2)
+    {
+        vel[1] = copysign(0.2,vel[0]);
+    }
     return vel;
 }
 

@@ -58,13 +58,11 @@ private:
   osg::ref_ptr<osgViewer::View> mView;
   osg::ref_ptr<osg::Group> mRoot;
   int mTimerId{0};
-  SpherePhysics* sp1;
-  SpherePhysics* sp2;
-  SpherePhysics* sp3;
+  int count{0};
   std::vector<ball*> ballList;
   std::array<double,3> ballColor;
   std::array<double,2> ballRadius;
-  std::array<double,3> ballVelocity;
+  std::array<double,3> ballVelocity;  
 };
 
 #endif
