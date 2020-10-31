@@ -20,8 +20,10 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     mRoot->addChild(transform2);
 
     // ball* ball1 = create_sphere(mRoot, std::array<double,3>{-3,0,3}, std::array<double,3>{8,10,12}, osg::Vec4(0.0f, 1.f, 0.f, 1.f), 0.8f);
-    ball* ball1 = create_sphere(mRoot, std::array<double,3>{-3,0,3}, std::array<double,3>{8,10,12}, create_a_random_color(), 0.8f);
+    ball* ball1 = create_sphere(mRoot, std::array<double,3>{0,0,-3.5}, create_a_random_velocity(), create_a_random_color(),(float)create_random_no_between_a_range(0.3,0.9));
     ballList.push_back(ball1);
+    ball* ball2 = create_sphere(mRoot, std::array<double,3>{0,0,-3.5}, create_a_random_velocity(), create_a_random_color(), (float)create_random_no_between_a_range(0.3,0.9));
+    ballList.push_back(ball2);
 
     sp3 = new SpherePhysics(std::array<double,3>{0,0,-3},std::array<double,3>{0,0,10});
     graphicsRepresentation* gr = new graphicsRepresentation(mRoot, sp3, 0.6f, osg::Vec4(1.0f, 0.f, 0.f, 1.f));
@@ -212,6 +214,15 @@ double OSGWidget::create_random_no_between_a_range(double min, double max)
 {
     double number = (max - min) * ( (double)(rand()%100) / 100. ) + min;
     return number;
+}
+
+std::array<double,3> OSGWidget::create_a_random_velocity(std::array<double, 3> factor)
+{
+    std::array<double,3> vel = {create_random_no_between_a_range(0.2,2.)*factor[0],
+                                create_random_no_between_a_range(0.2,2.)*factor[1],
+                                create_random_no_between_a_range(0.4,2.)*factor[2]
+                                };
+    return vel;
 }
 
 osg::Vec4 OSGWidget::create_a_random_color( std::array<double,6> rangesRGB)

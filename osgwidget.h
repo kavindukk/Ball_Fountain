@@ -47,6 +47,7 @@ protected:
                      osg::Vec4 Color, float radius );
   double create_random_no_between_a_range(double min, double max);
   osg::Vec4 create_a_random_color(std::array<double,6> rangesRGB={0.,1.,0.,1.,0.,1.});
+  std::array<double,3> create_a_random_velocity(std::array<double, 3> factor = {10.,10.,10.});
   
 
 private:
