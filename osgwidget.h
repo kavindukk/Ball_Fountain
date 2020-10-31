@@ -41,10 +41,7 @@ protected:
   void createCamera(osgViewer::View *mView);
   void createManipulator(osgViewer::View *mView);  
   void createViewer(osgViewer::CompositeViewer *mViewer, osgViewer::View *mView);
-  void create_timer_event();  
-  osg::Geode* createSpheregeode();
-  osg::PositionAttitudeTransform* createTransformation(osg::Geode* geode, SpherePhysics* _sp);  
-  // osg::PositionAttitudeTransform * create_wireframe_tetrahedron(osg::Vec4 &color, osg::Vec3d &scaleFactor);
+  void create_timer_event();   
   osg::PositionAttitudeTransform * create_wireframe_tetrahedron();
   ball* create_sphere(osg::Group* root, std::array<double,3> pos, std::array<double,3> vel,
                      osg::Vec4 Color, float radius );
@@ -52,7 +49,6 @@ protected:
   osg::Vec4 create_a_random_color(std::array<double,6> rangesRGB={0.,1.,0.,1.,0.,1.});
   std::array<double,3> create_a_random_velocity(std::array<double, 3> factor = {10.,10.,10.});
   
-
 private:
   virtual void on_resize( int width, int height );
   osgGA::EventQueue* getEventQueue() const;

@@ -11,8 +11,7 @@ OSGWidget::OSGWidget( QWidget* parent, Qt::WindowFlags flags ):
     mRoot = new osg::Group;
     mView = new osgViewer::View;
     createViewer(mViewer, mView);
-    osg::Geode* geode = createSpheregeode();
-    
+
     for (int i = 0; i < 5; i++)
     {
         ballList.push_back(create_sphere(mRoot, std::array<double,3>{0,0,-3.5}, create_a_random_velocity(), create_a_random_color(),(float)create_random_no_between_a_range(0.3,0.9)));
@@ -118,39 +117,6 @@ void OSGWidget::createManipulator(osgViewer::View *mView)
     manipulator->setHomePosition(osg::Vec3d(10.0,-20.0,3.0),osg::Vec3d(0,0,0),osg::Vec3d(0,0,1));
     mView->setCameraManipulator( manipulator );
 }
-
-osg::Geode* OSGWidget::createSpheregeode()
-{
-    osg::Sphere* sphere    = new osg::Sphere( osg::Vec3( 0.f, 0.f, 0.f ), 0.5f );
-    osg::ShapeDrawable* sd = new osg::ShapeDrawable( sphere );
-    sd->setColor( osg::Vec4( 1.f, 0.f, 1.f, 1.f ) );
-    sd->setName( "Sphere" );
-
-    osg::Geode* geode = new osg::Geode;
-    geode->addDrawable( sd );
-
-    osg::StateSet* stateSet = geode->getOrCreateStateSet();
-    osg::Material* material = new osg::Material;
-
-    material->setColorMode( osg::Material::AMBIENT_AND_DIFFUSE );
-
-    stateSet->setAttributeAndModes( material, osg::StateAttribute::ON );
-    stateSet->setMode( GL_DEPTH_TEST, osg::StateAttribute::ON );
-    stateSet->setMode( GL_BLEND, osg::StateAttribute::ON );
-    stateSet->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
-    return geode;
-}
-
- osg::PositionAttitudeTransform* OSGWidget::createTransformation(osg::Geode* geode, SpherePhysics* _sp)
- {
-    // SpherePhysics *sp = new SpherePhysics(std::array<double,3>{0,0,0},std::array<double,3>{10,0,0},1.0/30.0);
-    SpherePhysics *sp = _sp;
-    osg::PositionAttitudeTransform *transform = new osg::PositionAttitudeTransform;
-    transform->setPosition(osg::Vec3( 0.f, 0.f, 0.f ));
-    transform->setUpdateCallback(new SphereUpdateCallback(sp));
-    transform->addChild(geode);
-    return transform;
- }
 
 void OSGWidget::createViewer(osgViewer::CompositeViewer *mViewer, osgViewer::View *mView)
 {
