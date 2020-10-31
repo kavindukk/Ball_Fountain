@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "spherephysics.h"
+#include "osgwidget.h"
 
 #include<array>
 
@@ -94,6 +95,26 @@ TEST(Collisions, CheckCheckForCollisionFunction)
     SpherePhysics* sp2 = new SpherePhysics(std::array<double,3> {0.9,0.,0.}, std::array<double,3> {-5.,0.,0});
 
     EXPECT_EQ(true, check_for_collisions(sp1,sp2) );
+    delete sp1;
+    delete sp2;
+}
+
+TEST(MathsFunctions, CheckCreateRandomNoWithinARangeFunction)
+{
+    double min{5.};
+    double max{10.};
+    std::default_random_engine generator;
+    std::normal_distribution<double> distribution (min+(max-min)/2.,(max-min)/4);
+    double number =distribution(generator);
+    if(number>max)
+    {
+        number=max;
+    }
+    else if(number<min)
+    {
+        number=min;
+    }
+    EXPECT_TRUE((number >= 5) && (number <= 10));
 }
 
 

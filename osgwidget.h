@@ -17,6 +17,7 @@
 #include "ball.h"
 
 #include <vector>
+#include <random>
 
 class OSGWidget : public QOpenGLWidget
 {

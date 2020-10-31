@@ -207,6 +207,22 @@ osg::PositionAttitudeTransform * OSGWidget::create_wireframe_tetrahedron()
     return transform;
 }
 
+double OSGWidget::create_random_no_between_a_range(double min, double max)
+{
+    std::default_random_engine generator;
+    std::normal_distribution<double> distribution (min+(max-min)/2.,(max-min)/4);
+    double number =distribution(generator);
+    if(number>max)
+    {
+        number=max;
+    }
+    else if(number<min)
+    {
+        number=min;
+    }
+    return number;
+}
+
 ball* OSGWidget::create_sphere(osg::Group *root, std::array<double,3> pos, std::array<double,3> vel,
                                  osg::Vec4 Color, float radius)
 {
@@ -224,3 +240,5 @@ void OSGWidget::create_timer_event()
     mTimerId=startTimer(timerDurationInMilliSeconds);
 
 }
+
+
