@@ -47,7 +47,7 @@ void OSGWidget::timerEvent(QTimerEvent *)
 {
     ++count;
     update();
-    if(mTimerId>80){
+    if(count>80){
         for(std::vector<ball*>::iterator iter = ballList.begin(), end = ballList.end() ; iter != end; ++iter)
         {
             for(std::vector<ball*>::iterator iter2 = iter+1, end = ballList.end() ; iter2 != end; ++iter2)

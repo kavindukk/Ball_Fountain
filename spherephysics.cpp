@@ -122,8 +122,8 @@ void update_collisions_between_balls(SpherePhysics *ball1, SpherePhysics *ball2)
     double m2 = ball2->get_radius();
     double coeffCollision = ball1->get_collision_coefficient();
 
-    std::array<double,3> pB1 = { x1[0]-v1[0]*(3./30.), x1[1]-v1[1]*(3./30.), x1[2]-v1[2]*(1./30.) };
-    std::array<double,3> pB2 = { x2[0]-v2[0]*(3./30.), x2[1]-v2[1]*(3./30.), x2[2]-v2[2]*(1./30.) };
+    std::array<double,3> pB1 = { x1[0]-v1[0]*(3./30.), x1[1]-v1[1]*(3./30.), x1[2] }; //-v1[2]*(1./30.)
+    std::array<double,3> pB2 = { x2[0]-v2[0]*(3./30.), x2[1]-v2[1]*(3./30.), x2[2] }; //-v2[2]*(1./30.)
     ball1->set_position(pB1);
     ball2->set_position(pB2);
 
