@@ -25,9 +25,9 @@ add_library( physics STATIC
     spherephysics.cpp
 )
 
-add_library( graphics STATIC
-    graphicsrepresentation.h
-    graphicsrepresentation.cpp
+add_library( collision STATIC
+    collision.h
+    collision.cpp
 )
 
 add_executable(${PROJECT_NAME}
@@ -37,6 +37,8 @@ add_executable(${PROJECT_NAME}
     mainwindowform.ui
     osgwidget.cpp
     osgwidget.h
+    graphicsrepresentation.h
+    graphicsrepresentation.cpp
     spherecallback.cpp 
     spherecallback.h
     ball.cpp
