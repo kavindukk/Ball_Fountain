@@ -31,6 +31,7 @@ public:
   void set_ball_color(double val, int index);
   void set_ball_radius(double val, int index);
   void set_ball_velocity(double val, int index);
+  void set_ball_origin(double val, int index);
 protected:
   virtual void paintEvent( QPaintEvent* paintEvent );
   virtual void paintGL();
@@ -46,7 +47,7 @@ protected:
   ball* create_sphere(osg::Group* root, std::array<double,3> pos, std::array<double,3> vel,
                      osg::Vec4 Color, float radius );
   double create_random_no_between_a_range(double min, double max);
-  osg::Vec4 create_a_random_color(std::array<double,6> rangesRGB={0.,1.,0.,1.,0.,1.});
+  osg::Vec4 create_a_random_color(std::array<double,3> rangesRGB={1.,1.,1.});
   std::array<double,3> create_a_random_velocity(std::array<double, 3> factor = {10.,10.,10.});
   
 private:
@@ -60,9 +61,10 @@ private:
   int mTimerId{0};
   int count{0};
   std::vector<ball*> ballList;
-  std::array<double,3> ballColor;
-  std::array<double,2> ballRadius;
-  std::array<double,3> ballVelocity;  
+  std::array<double,3> ballColor{1.,1.,1.};
+  std::array<double,2> ballRadius = {0.3,0.9};
+  std::array<double,3> ballVelocity = {10., 10., 10.}; 
+  std::array<double,3> ballOrigin{0.,0.,-3.5}; 
 };
 
 #endif

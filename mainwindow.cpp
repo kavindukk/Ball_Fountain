@@ -59,3 +59,18 @@ void MainWindow::on_zVelocity_valueChanged(int value)
 {
  mMainWindowUI->widget->set_ball_velocity((double)value/100.,2);
 }
+
+void MainWindow::on_xPosition_valueChanged(int value)
+{
+   mMainWindowUI->widget->set_ball_origin((double)value/1000.,0);
+}
+
+void MainWindow::on_yPosition_valueChanged(int value)
+{
+    mMainWindowUI->widget->set_ball_origin((double)value/1000.,1);
+}
+
+void MainWindow::on_zPosition_valueChanged(int value)
+{
+    mMainWindowUI->widget->set_ball_origin(-3.+(double)value/1000.,2);
+}

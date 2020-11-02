@@ -43,6 +43,11 @@ void OSGWidget::set_ball_velocity(double val, int index)
     ballVelocity[index] = val;
 }
 
+void OSGWidget::set_ball_origin(double val, int index)
+{
+    ballOrigin[index] = val;
+}
+
 void OSGWidget::timerEvent(QTimerEvent *)
 {
     ++count;
@@ -62,7 +67,8 @@ void OSGWidget::timerEvent(QTimerEvent *)
 
     if(count%30==0)
     {
-         ballList.push_back(create_sphere(mRoot, std::array<double,3>{0,0,-3.}, create_a_random_velocity(), create_a_random_color(),(float)create_random_no_between_a_range(0.3,0.9)));
+        //  ballList.push_back(create_sphere(mRoot, std::array<double,3>{0,0,-3.}, create_a_random_velocity(), create_a_random_color(),(float)create_random_no_between_a_range(0.3,0.9)));
+         ballList.push_back(create_sphere(mRoot, ballOrigin, create_a_random_velocity(ballVelocity), create_a_random_color(ballColor),(float)create_random_no_between_a_range(ballRadius[0],ballRadius[1])));
     }
 
 }
@@ -218,12 +224,12 @@ std::array<double,3> OSGWidget::create_a_random_velocity(std::array<double, 3> f
     return vel;
 }
 
-osg::Vec4 OSGWidget::create_a_random_color( std::array<double,6> rangesRGB)
+osg::Vec4 OSGWidget::create_a_random_color( std::array<double,3> rangesRGB)
 {
     std::vector<float> values = {
-    (float)create_random_no_between_a_range(rangesRGB[0], rangesRGB[1]),
-    (float)create_random_no_between_a_range(rangesRGB[2], rangesRGB[3]),
-    (float)create_random_no_between_a_range(rangesRGB[4], rangesRGB[5]),
+    (float)create_random_no_between_a_range(0., rangesRGB[0]),
+    (float)create_random_no_between_a_range(0., rangesRGB[1]),
+    (float)create_random_no_between_a_range(0., rangesRGB[2]),
     };
     osg::Vec4 color(values[0], values[1], values[2], 1.f);
     return color;

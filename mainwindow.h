@@ -46,6 +46,12 @@ private slots:
 
     void on_zVelocity_valueChanged(int value);
 
+    void on_xPosition_valueChanged(int value);
+
+    void on_yPosition_valueChanged(int value);
+
+    void on_zPosition_valueChanged(int value);
+
 private:
     Ui::MainWindowForm * mMainWindowUI;
 };
