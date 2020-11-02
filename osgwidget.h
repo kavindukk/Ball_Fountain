@@ -64,7 +64,7 @@ private:
   std::array<double,3> ballColor{1.,1.,1.};
   std::array<double,2> ballRadius = {0.3,0.9};
   std::array<double,3> ballVelocity = {10., 10., 10.}; 
-  std::array<double,3> ballOrigin{0.,0.,-3.5}; 
+  std::array<double,3> ballOrigin{0.,0.,-3.};
 };
 
 #endif
