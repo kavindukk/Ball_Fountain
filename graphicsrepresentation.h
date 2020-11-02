@@ -18,6 +18,7 @@ public:
     void create_sphere_geode();
     void create_transform();
     void add_sphere_to_root();
+    ~graphicsRepresentation();
 
 protected:
     osg::Geode* mGd;

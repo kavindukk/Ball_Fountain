@@ -9,6 +9,7 @@ struct ball
     ball(SpherePhysics* _sp, graphicsRepresentation* _gr);
     SpherePhysics* mSp;
     graphicsRepresentation* mGr;
+    ~ball();
 };
 
 #endif // BALL_H

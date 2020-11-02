@@ -10,4 +10,9 @@ void SphereUpdateCallback::operator()(osg::Node* node, osg::NodeVisitor* nv)
         pat->setPosition(spherePosition);
 
         traverse(node, nv);
-    }
+}
+
+SphereUpdateCallback::~SphereUpdateCallback()
+{
+    delete [] sp;
+}

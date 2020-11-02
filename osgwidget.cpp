@@ -62,7 +62,7 @@ void OSGWidget::timerEvent(QTimerEvent *)
 
     if(count%30==0)
     {
-         ballList.push_back(create_sphere(mRoot, std::array<double,3>{0,0,-3.5}, create_a_random_velocity(), create_a_random_color(),(float)create_random_no_between_a_range(0.3,0.9)));
+         ballList.push_back(create_sphere(mRoot, std::array<double,3>{0,0,-3.}, create_a_random_velocity(), create_a_random_color(),(float)create_random_no_between_a_range(0.3,0.9)));
     }
 
 }

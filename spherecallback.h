@@ -11,6 +11,7 @@ class SphereUpdateCallback: public osg::NodeCallback
 public:
     SphereUpdateCallback(SpherePhysics* physics){ sp=physics;}
     virtual void operator()(osg::Node* node, osg::NodeVisitor* nv);
+    ~SphereUpdateCallback();
 
 protected:
     double mScaleStep{1.0/30.0};

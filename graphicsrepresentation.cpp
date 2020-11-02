@@ -42,3 +42,8 @@ void graphicsRepresentation::add_sphere_to_root()
 {
     mRoot->addChild(mPat);
 }
+
+graphicsRepresentation::~graphicsRepresentation()
+{
+
+}
