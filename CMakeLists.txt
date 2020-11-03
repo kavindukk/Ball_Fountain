@@ -25,11 +25,6 @@ add_library( physics STATIC
     spherephysics.cpp
 )
 
-add_library( collision STATIC
-    collision.h
-    collision.cpp
-)
-
 add_executable(${PROJECT_NAME}
     main.cpp
     mainwindow.cpp
@@ -43,6 +38,8 @@ add_executable(${PROJECT_NAME}
     spherecallback.h
     ball.cpp
     ball.h
+    collision.h
+    collision.cpp
     unitTest.cpp 
 )
 

@@ -14,6 +14,7 @@
 #include "spherephysics.h"
 #include <spherecallback.h>
 #include "graphicsrepresentation.h"
+#include "collision.h"
 #include "ball.h"
 
 #include <vector>
