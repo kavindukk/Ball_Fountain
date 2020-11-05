@@ -48,7 +48,7 @@ target_link_libraries(${PROJECT_NAME}
     Qt5::Widgets
     Qt5::Gui
     physics
-    graphics
     ${GTEST_LIBRARIES}
     ${GTEST_MAIN_LIBRARIES}
+    pthread
 )

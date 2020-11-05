@@ -63,9 +63,9 @@ private:
   int count{0};
   std::vector<ball*> ballList;
   std::array<double,3> ballColor{1.,1.,1.};
-  std::array<double,2> ballRadius = {0.3,0.9};
+  std::array<double,2> ballRadius = {0.3,0.6};
   std::array<double,3> ballVelocity = {10., 10., 10.}; 
-  std::array<double,3> ballOrigin{0.,0.,-3.};
+  std::array<double,3> ballOrigin{0.,0.,-2.};
 };
 
 #endif
